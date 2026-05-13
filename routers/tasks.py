@@ -58,7 +58,7 @@ async def task_get(task_name: str,
     task = result.scalars().first()
 
 # checking results of request
-    if task is None:
+    if task is None or task.is_deleted is True:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,
                             detail = f"Task with name {task_name.lower().strip()} not found")
     else:
